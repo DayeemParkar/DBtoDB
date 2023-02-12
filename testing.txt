@@ -1,0 +1,11 @@
+year+month (6 digit)
+export/import (1 digit) 1 - export, 2 - import
+hs9 (3 digit)
+customs (3 digit)
+country (exactly 9 digits)
+quantity1 (12 digits)
+quantity2 (10 digits)
+value in 1k yen (9 digits)
+
+1M records reading + writing: 350s (~6 min)
+100M : 10 hrs

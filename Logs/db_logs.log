@@ -1,0 +1,271 @@
+2023-02-12 23:48:54.721364 - Info: Initialized file ./Data/custom_1988_2020.csv with mode r
+2023-02-12 23:48:54.770338 - Info: Established new DB connection - <connection object at 0x1032c62e0; dsn: 'user=postgres password=xxx dbname=trade_data_db host=127.0.0.1 port=5438', closed: 0>
+2023-02-12 23:48:54.770349 - Info: DB connection is already established
+2023-02-12 23:48:54.770353 - Info: Startup successful
+2023-02-12 23:48:54.770356 - Info: DB connection is already established
+2023-02-12 23:48:54.778203 - Info: Retrieved number of rows of table trades
+2023-02-12 23:49:00.400165 - Info: DB connection is already established
+2023-02-12 23:49:00.405522 - Info: DB connection is already established
+2023-02-12 23:49:00.414591 - Info: Commit Successful
+2023-02-12 23:49:00.414633 - Info: Successfully truncated table trades
+2023-02-12 23:49:00.414641 - Info: Restarting insertion
+2023-02-12 23:49:00.428038 - Info: DB connection is already established
+2023-02-12 23:49:03.902283 - Info: DB connection is already established
+2023-02-12 23:49:03.903085 - Info: Commit Successful
+2023-02-12 23:49:03.903109 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:03.903206 - Info: Batch 1 completed in 3.4884334169999995 seconds
+2023-02-12 23:49:03.917963 - Info: DB connection is already established
+2023-02-12 23:49:07.294317 - Info: DB connection is already established
+2023-02-12 23:49:07.294916 - Info: Commit Successful
+2023-02-12 23:49:07.294940 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:07.295004 - Info: Batch 2 completed in 3.389546874999999 seconds
+2023-02-12 23:49:07.306153 - Info: DB connection is already established
+2023-02-12 23:49:10.729361 - Info: DB connection is already established
+2023-02-12 23:49:10.730201 - Info: Commit Successful
+2023-02-12 23:49:10.730211 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:10.730251 - Info: Batch 3 completed in 3.432622124999998 seconds
+2023-02-12 23:49:10.738310 - Info: DB connection is already established
+2023-02-12 23:49:14.201259 - Info: DB connection is already established
+2023-02-12 23:49:14.202557 - Info: Commit Successful
+2023-02-12 23:49:14.202588 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:14.202657 - Info: Batch 4 completed in 3.4717045000000013 seconds
+2023-02-12 23:49:14.218461 - Info: DB connection is already established
+2023-02-12 23:49:17.646429 - Info: DB connection is already established
+2023-02-12 23:49:17.647827 - Info: Commit Successful
+2023-02-12 23:49:17.647866 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:17.647928 - Info: Batch 5 completed in 3.4428982920000024 seconds
+2023-02-12 23:49:17.662608 - Info: DB connection is already established
+2023-02-12 23:49:21.091029 - Info: DB connection is already established
+2023-02-12 23:49:21.091625 - Info: Commit Successful
+2023-02-12 23:49:21.091654 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:21.091716 - Info: Batch 6 completed in 3.441558665999999 seconds
+2023-02-12 23:49:21.106700 - Info: DB connection is already established
+2023-02-12 23:49:24.373982 - Info: DB connection is already established
+2023-02-12 23:49:24.374844 - Info: Commit Successful
+2023-02-12 23:49:24.374866 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:24.374980 - Info: Batch 7 completed in 3.2809508329999986 seconds
+2023-02-12 23:49:24.390975 - Info: DB connection is already established
+2023-02-12 23:49:27.830370 - Info: DB connection is already established
+2023-02-12 23:49:27.831596 - Info: Commit Successful
+2023-02-12 23:49:27.831616 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:27.831661 - Info: Batch 8 completed in 3.4548752920000005 seconds
+2023-02-12 23:49:27.845984 - Info: DB connection is already established
+2023-02-12 23:49:31.256902 - Info: DB connection is already established
+2023-02-12 23:49:31.257706 - Info: Commit Successful
+2023-02-12 23:49:31.257731 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:31.257790 - Info: Batch 9 completed in 3.4248749579999966 seconds
+2023-02-12 23:49:31.275464 - Info: DB connection is already established
+2023-02-12 23:49:34.681421 - Info: DB connection is already established
+2023-02-12 23:49:34.682131 - Info: Commit Successful
+2023-02-12 23:49:34.682161 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:34.682223 - Info: Batch 10 completed in 3.422231624999995 seconds
+2023-02-12 23:49:34.696860 - Info: DB connection is already established
+2023-02-12 23:49:37.942254 - Info: DB connection is already established
+2023-02-12 23:49:37.943169 - Info: Commit Successful
+2023-02-12 23:49:37.943203 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:37.943295 - Info: Batch 11 completed in 3.2588342500000067 seconds
+2023-02-12 23:49:37.957614 - Info: DB connection is already established
+2023-02-12 23:49:41.286581 - Info: DB connection is already established
+2023-02-12 23:49:41.287910 - Info: Commit Successful
+2023-02-12 23:49:41.287928 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:41.287965 - Info: Batch 12 completed in 3.3425891249999964 seconds
+2023-02-12 23:49:41.303049 - Info: DB connection is already established
+2023-02-12 23:49:44.757272 - Info: DB connection is already established
+2023-02-12 23:49:44.758044 - Info: Commit Successful
+2023-02-12 23:49:44.758075 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:44.758135 - Info: Batch 13 completed in 3.4691395420000006 seconds
+2023-02-12 23:49:44.773942 - Info: DB connection is already established
+2023-02-12 23:49:48.184712 - Info: DB connection is already established
+2023-02-12 23:49:48.185504 - Info: Commit Successful
+2023-02-12 23:49:48.185526 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:48.185589 - Info: Batch 14 completed in 3.4252177080000052 seconds
+2023-02-12 23:49:48.201842 - Info: DB connection is already established
+2023-02-12 23:49:51.591170 - Info: DB connection is already established
+2023-02-12 23:49:51.592000 - Info: Commit Successful
+2023-02-12 23:49:51.592027 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:51.592107 - Info: Batch 15 completed in 3.4043023750000003 seconds
+2023-02-12 23:49:51.605757 - Info: DB connection is already established
+2023-02-12 23:49:55.057338 - Info: DB connection is already established
+2023-02-12 23:49:55.058775 - Info: Commit Successful
+2023-02-12 23:49:55.058810 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:55.058873 - Info: Batch 16 completed in 3.4655314159999975 seconds
+2023-02-12 23:49:55.075056 - Info: DB connection is already established
+2023-02-12 23:49:58.482383 - Info: DB connection is already established
+2023-02-12 23:49:58.483136 - Info: Commit Successful
+2023-02-12 23:49:58.483153 - Info: Inserted 10000 rows into table
+2023-02-12 23:49:58.483187 - Info: Batch 17 completed in 3.4219525829999995 seconds
+2023-02-12 23:49:58.497748 - Info: DB connection is already established
+2023-02-12 23:50:01.845784 - Info: DB connection is already established
+2023-02-12 23:50:01.846693 - Info: Commit Successful
+2023-02-12 23:50:01.846718 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:01.846810 - Info: Batch 18 completed in 3.3626787500000006 seconds
+2023-02-12 23:50:01.862962 - Info: DB connection is already established
+2023-02-12 23:50:05.363347 - Info: DB connection is already established
+2023-02-12 23:50:05.364342 - Info: Commit Successful
+2023-02-12 23:50:05.364372 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:05.364446 - Info: Batch 19 completed in 3.515579458000005 seconds
+2023-02-12 23:50:05.379914 - Info: DB connection is already established
+2023-02-12 23:50:08.813149 - Info: DB connection is already established
+2023-02-12 23:50:08.814045 - Info: Commit Successful
+2023-02-12 23:50:08.814075 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:08.814168 - Info: Batch 20 completed in 3.447616124999996 seconds
+2023-02-12 23:50:08.830646 - Info: DB connection is already established
+2023-02-12 23:50:22.960473 - Info: Initialized file ./Data/custom_1988_2020.csv with mode r
+2023-02-12 23:50:23.003632 - Info: Established new DB connection - <connection object at 0x1051dd2e0; dsn: 'user=postgres password=xxx dbname=trade_data_db host=127.0.0.1 port=5438', closed: 0>
+2023-02-12 23:50:23.003645 - Info: DB connection is already established
+2023-02-12 23:50:23.003648 - Info: Startup successful
+2023-02-12 23:50:23.003651 - Info: DB connection is already established
+2023-02-12 23:50:23.030156 - Info: Retrieved number of rows of table trades
+2023-02-12 23:50:29.337391 - Info: Moved to line 200000 in file
+2023-02-12 23:50:29.337413 - Info: Continuing insertion from entry 200000
+2023-02-12 23:50:29.343816 - Info: DB connection is already established
+2023-02-12 23:50:32.782484 - Info: DB connection is already established
+2023-02-12 23:50:32.784024 - Info: Commit Successful
+2023-02-12 23:50:32.784056 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:32.784165 - Info: Batch 21 completed in 3.446622458000001 seconds
+2023-02-12 23:50:32.799353 - Info: DB connection is already established
+2023-02-12 23:50:36.212355 - Info: DB connection is already established
+2023-02-12 23:50:36.212965 - Info: Commit Successful
+2023-02-12 23:50:36.212987 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:36.213057 - Info: Batch 22 completed in 3.4267447499999992 seconds
+2023-02-12 23:50:36.228244 - Info: DB connection is already established
+2023-02-12 23:50:39.654393 - Info: DB connection is already established
+2023-02-12 23:50:39.655189 - Info: Commit Successful
+2023-02-12 23:50:39.655215 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:39.655326 - Info: Batch 23 completed in 3.4398708340000024 seconds
+2023-02-12 23:50:39.672035 - Info: DB connection is already established
+2023-02-12 23:50:43.139908 - Info: DB connection is already established
+2023-02-12 23:50:43.140723 - Info: Commit Successful
+2023-02-12 23:50:43.140745 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:43.140811 - Info: Batch 24 completed in 3.4830383749999996 seconds
+2023-02-12 23:50:43.157291 - Info: DB connection is already established
+2023-02-12 23:50:46.454287 - Info: DB connection is already established
+2023-02-12 23:50:46.455571 - Info: Commit Successful
+2023-02-12 23:50:46.455610 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:46.455673 - Info: Batch 25 completed in 3.312477417 seconds
+2023-02-12 23:50:46.471554 - Info: DB connection is already established
+2023-02-12 23:50:49.827794 - Info: DB connection is already established
+2023-02-12 23:50:49.828586 - Info: Commit Successful
+2023-02-12 23:50:49.828608 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:49.828672 - Info: Batch 26 completed in 3.370759582999998 seconds
+2023-02-12 23:50:49.845530 - Info: DB connection is already established
+2023-02-12 23:50:53.313000 - Info: DB connection is already established
+2023-02-12 23:50:53.313804 - Info: Commit Successful
+2023-02-12 23:50:53.313830 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:53.313912 - Info: Batch 27 completed in 3.4826440410000004 seconds
+2023-02-12 23:50:53.329913 - Info: DB connection is already established
+2023-02-12 23:50:56.555356 - Info: DB connection is already established
+2023-02-12 23:50:56.556297 - Info: Commit Successful
+2023-02-12 23:50:56.556307 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:56.556346 - Info: Batch 28 completed in 3.2402573329999953 seconds
+2023-02-12 23:50:56.563674 - Info: DB connection is already established
+2023-02-12 23:50:59.759046 - Info: DB connection is already established
+2023-02-12 23:50:59.759950 - Info: Commit Successful
+2023-02-12 23:50:59.759966 - Info: Inserted 10000 rows into table
+2023-02-12 23:50:59.760010 - Info: Batch 29 completed in 3.2047123749999997 seconds
+2023-02-12 23:50:59.771519 - Info: DB connection is already established
+2023-02-12 23:51:02.858474 - Info: DB connection is already established
+2023-02-12 23:51:02.859314 - Info: Commit Successful
+2023-02-12 23:51:02.859323 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:02.859344 - Info: Batch 30 completed in 3.1009917500000057 seconds
+2023-02-12 23:51:02.866305 - Info: DB connection is already established
+2023-02-12 23:51:06.139104 - Info: DB connection is already established
+2023-02-12 23:51:06.140510 - Info: Commit Successful
+2023-02-12 23:51:06.140543 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:06.140614 - Info: Batch 31 completed in 3.282682041000001 seconds
+2023-02-12 23:51:06.157851 - Info: DB connection is already established
+2023-02-12 23:51:09.567415 - Info: DB connection is already established
+2023-02-12 23:51:09.568752 - Info: Commit Successful
+2023-02-12 23:51:09.568786 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:09.568864 - Info: Batch 32 completed in 3.427732834000004 seconds
+2023-02-12 23:51:09.584660 - Info: DB connection is already established
+2023-02-12 23:51:13.064275 - Info: DB connection is already established
+2023-02-12 23:51:13.065068 - Info: Commit Successful
+2023-02-12 23:51:13.065091 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:13.065154 - Info: Batch 33 completed in 3.495512583 seconds
+2023-02-12 23:51:13.079836 - Info: DB connection is already established
+2023-02-12 23:51:16.505832 - Info: DB connection is already established
+2023-02-12 23:51:16.506700 - Info: Commit Successful
+2023-02-12 23:51:16.506726 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:16.506843 - Info: Batch 34 completed in 3.4406279170000005 seconds
+2023-02-12 23:51:16.521403 - Info: DB connection is already established
+2023-02-12 23:51:19.831857 - Info: DB connection is already established
+2023-02-12 23:51:19.832586 - Info: Commit Successful
+2023-02-12 23:51:19.832599 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:19.832645 - Info: Batch 35 completed in 3.3245074999999957 seconds
+2023-02-12 23:51:19.847423 - Info: DB connection is already established
+2023-02-12 23:51:23.342014 - Info: DB connection is already established
+2023-02-12 23:51:23.342759 - Info: Commit Successful
+2023-02-12 23:51:23.342781 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:23.342843 - Info: Batch 36 completed in 3.5096253330000025 seconds
+2023-02-12 23:51:23.360134 - Info: DB connection is already established
+2023-02-12 23:51:26.732138 - Info: DB connection is already established
+2023-02-12 23:51:26.732679 - Info: Commit Successful
+2023-02-12 23:51:26.732700 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:26.732765 - Info: Batch 37 completed in 3.3883784999999946 seconds
+2023-02-12 23:51:26.748084 - Info: DB connection is already established
+2023-02-12 23:51:30.181290 - Info: DB connection is already established
+2023-02-12 23:51:30.182713 - Info: Commit Successful
+2023-02-12 23:51:30.182742 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:30.182821 - Info: Batch 38 completed in 3.4483967500000006 seconds
+2023-02-12 23:51:30.198540 - Info: DB connection is already established
+2023-02-12 23:51:33.658952 - Info: DB connection is already established
+2023-02-12 23:51:33.659867 - Info: Commit Successful
+2023-02-12 23:51:33.659877 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:33.659912 - Info: Batch 39 completed in 3.4754016249999893 seconds
+2023-02-12 23:51:33.669285 - Info: DB connection is already established
+2023-02-12 23:51:37.136086 - Info: DB connection is already established
+2023-02-12 23:51:37.136826 - Info: Commit Successful
+2023-02-12 23:51:37.136858 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:37.136920 - Info: Batch 40 completed in 3.4766618330000085 seconds
+2023-02-12 23:51:37.151211 - Info: DB connection is already established
+2023-02-12 23:51:40.581246 - Info: DB connection is already established
+2023-02-12 23:51:40.582686 - Info: Commit Successful
+2023-02-12 23:51:40.582718 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:40.582784 - Info: Batch 41 completed in 3.444267791999991 seconds
+2023-02-12 23:51:40.597851 - Info: DB connection is already established
+2023-02-12 23:51:44.048737 - Info: DB connection is already established
+2023-02-12 23:51:44.050021 - Info: Commit Successful
+2023-02-12 23:51:44.050045 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:44.050256 - Info: Batch 42 completed in 3.4656687079999955 seconds
+2023-02-12 23:51:44.063191 - Info: DB connection is already established
+2023-02-12 23:51:47.539066 - Info: DB connection is already established
+2023-02-12 23:51:47.539984 - Info: Commit Successful
+2023-02-12 23:51:47.540010 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:47.540072 - Info: Batch 43 completed in 3.4877435829999968 seconds
+2023-02-12 23:51:47.556430 - Info: DB connection is already established
+2023-02-12 23:51:50.998438 - Info: DB connection is already established
+2023-02-12 23:51:50.999261 - Info: Commit Successful
+2023-02-12 23:51:50.999294 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:50.999392 - Info: Batch 44 completed in 3.4570685410000124 seconds
+2023-02-12 23:51:51.015633 - Info: DB connection is already established
+2023-02-12 23:51:54.458579 - Info: DB connection is already established
+2023-02-12 23:51:54.459998 - Info: Commit Successful
+2023-02-12 23:51:54.460024 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:54.460093 - Info: Batch 45 completed in 3.458472416999996 seconds
+2023-02-12 23:51:54.475746 - Info: DB connection is already established
+2023-02-12 23:51:57.929300 - Info: DB connection is already established
+2023-02-12 23:51:57.930812 - Info: Commit Successful
+2023-02-12 23:51:57.930843 - Info: Inserted 10000 rows into table
+2023-02-12 23:51:57.930910 - Info: Batch 46 completed in 3.468684332999999 seconds
+2023-02-12 23:51:57.946378 - Info: DB connection is already established
+2023-02-12 23:52:01.375540 - Info: DB connection is already established
+2023-02-12 23:52:01.376463 - Info: Commit Successful
+2023-02-12 23:52:01.376493 - Info: Inserted 10000 rows into table
+2023-02-12 23:52:01.376594 - Info: Batch 47 completed in 3.443515667 seconds
+2023-02-12 23:52:01.392742 - Info: DB connection is already established
+2023-02-12 23:52:04.839922 - Info: DB connection is already established
+2023-02-12 23:52:04.840717 - Info: Commit Successful
+2023-02-12 23:52:04.840746 - Info: Inserted 10000 rows into table
+2023-02-12 23:52:04.840842 - Info: Batch 48 completed in 3.4619866249999944 seconds
+2023-02-12 23:52:04.857680 - Info: DB connection is already established
+2023-02-12 23:52:08.310010 - Info: DB connection is already established
+2023-02-12 23:52:08.310834 - Info: Commit Successful
+2023-02-12 23:52:08.310845 - Info: Inserted 10000 rows into table
+2023-02-12 23:52:08.310877 - Info: Batch 49 completed in 3.467861459000005 seconds
+2023-02-12 23:52:08.327474 - Info: DB connection is already established
+2023-02-12 23:52:11.751688 - Info: DB connection is already established
+2023-02-12 23:52:11.752516 - Info: Commit Successful
+2023-02-12 23:52:11.752539 - Info: Inserted 10000 rows into table
+2023-02-12 23:52:11.752601 - Info: Batch 50 completed in 3.4403833329999998 seconds
+2023-02-12 23:52:11.770008 - Info: DB connection is already established
