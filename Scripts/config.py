@@ -1,7 +1,6 @@
 '''This file retrieves the environment variables'''
 from os import environ
 from ast import literal_eval
-from logger_class import Logger
 
 DBVARS = None
 TRADE_TABLE = None

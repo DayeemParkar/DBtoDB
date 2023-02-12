@@ -11,6 +11,7 @@ class DBConnection:
     cur = None
     _instance = None
     
+    
     def __new__(cls):
         '''This method overrides new to make it a singleton'''
         if not cls._instance:
