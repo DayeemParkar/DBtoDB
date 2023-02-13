@@ -5,7 +5,7 @@ from config import DBVARS
 
 
 class DBConnection:
-    '''Class containing methods to perform CRUD operations'''
+    '''Class containing methods to perform operations on database and tables'''
     # class members
     conn = None
     cur = None
