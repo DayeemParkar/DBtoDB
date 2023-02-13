@@ -1,7 +1,8 @@
 '''This file contains the DBConnection class'''
 import psycopg2
+import psycopg2.extras
 from logger_class import Logger
-from config import DBVARS, TRADE_TABLE, CREATE_QUERY, INSERT_QUERY
+from config import DBVARS
 
 
 class DBConnection:
@@ -10,6 +11,8 @@ class DBConnection:
     conn = None
     cur = None
     _instance = None
+    retries = None
+    insert_query = ''
     
     
     def __new__(cls):
@@ -17,6 +20,12 @@ class DBConnection:
         if not cls._instance:
             cls._instance = super(DBConnection, cls).__new__(cls)
         return cls._instance
+    
+    
+    @classmethod
+    def setInsertQuery(cls, insert_query):
+        '''This method sets the insert query'''
+        cls.insert_query = insert_query
     
     
     @classmethod
@@ -52,17 +61,15 @@ class DBConnection:
     
     
     @classmethod
-    def createTable(cls):
+    def createTable(cls, table_name, create_query):
         '''This method creates the required table if it doesn't exist'''
         try:
             DBConnection.dbConnect()
-            cls.cur.execute(CREATE_QUERY)
-            if cls.commitChanges():
-                Logger.logEvent('Info', f'Created table - {TRADE_TABLE}')
-                return
-            Logger.logEvent('Error', f'Error while commit of new table')
+            cls.cur.execute(create_query)
+            cls.commitChanges()
+            Logger.logEvent('Info', f'Created table - {table_name}')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Could not create table {TRADE_TABLE}: {pe}')
+            Logger.logEvent('Error', f'Could not create table {table_name}: {pe}')
             cls.conn.rollback()
     
     
@@ -71,14 +78,20 @@ class DBConnection:
         '''This method inserts rows into table'''
         try:
             DBConnection.dbConnect()
-            cls.cur.executemany(INSERT_QUERY, entries)
-            if cls.commitChanges():
-                Logger.logEvent('Info', f'Inserted {len(entries)} rows into table')
-                return True
-            Logger.logEvent('Error', f'Error while inserting {len(entries)} entriees')
+            if not cls.retries:
+                cls.retries = 0
+            if cls.retries > 3:
+                return False
+            psycopg2.extras.execute_batch(cls.cur, cls.insert_query, entries)
+            cls.commitChanges()
+            Logger.logEvent('Info', f'Inserted {len(entries)} rows into table')
+            cls.retries = None
+            return True
         except psycopg2.DatabaseError as dbe:
             Logger.logEvent('Error', f'Database error while inserting {len(entries)} entries: {dbe}')
             cls.conn.rollback()
+            cls.retries += 1
+            cls.insertRows(entries)
             return False
         except psycopg2.Error as pe:
             Logger.logEvent('Error', f'Error while inserting {len(entries)} entries: {pe}')
@@ -87,51 +100,51 @@ class DBConnection:
     
     
     @classmethod
-    def truncateTable(cls):
+    def truncateTable(cls, table_name):
         '''This method drops table if it exists'''
         try:
             DBConnection.dbConnect()
-            cls.cur.execute(f"TRUNCATE TABLE {TRADE_TABLE};")
+            cls.cur.execute(f"TRUNCATE TABLE {table_name};")
             if cls.commitChanges():
-                Logger.logEvent('Info', f'Successfully truncated table {TRADE_TABLE}')
+                Logger.logEvent('Info', f'Successfully truncated table {table_name}')
                 return True
-            Logger.logEvent('Error', f'Error while truncating table {TRADE_TABLE}')
+            Logger.logEvent('Error', f'Error while truncating table {table_name}')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while truncating table {TRADE_TABLE}: {pe}')
+            Logger.logEvent('Error', f'Error while truncating table {table_name}: {pe}')
             cls.conn.rollback()
             return False
     
     
     @classmethod
-    def dropTable(cls):
+    def dropTable(cls, table_name):
         '''This method drops table if it exists'''
         try:
             DBConnection.dbConnect()
-            cls.cur.execute(f"DROP TABLE IF EXISTS {TRADE_TABLE};")
+            cls.cur.execute(f"DROP TABLE IF EXISTS {table_name};")
             if cls.commitChanges():
-                Logger.logEvent('Info', f'Dropped table {TRADE_TABLE}')
+                Logger.logEvent('Info', f'Dropped table {table_name}')
                 return True
-            Logger.logEvent('Error', f'Error while dropping table {TRADE_TABLE}')
+            Logger.logEvent('Error', f'Error while dropping table {table_name}')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while dropping table {TRADE_TABLE}: {pe}')
+            Logger.logEvent('Error', f'Error while dropping table {table_name}: {pe}')
             cls.conn.rollback()
             return False
     
     
     @classmethod
-    def getCount(cls):
+    def getCount(cls, table_name):
         '''This method drops table if it exists'''
         try:
             DBConnection.dbConnect()
-            cls.cur.execute(f"SELECT COUNT(*) FROM {TRADE_TABLE};")
+            cls.cur.execute(f"SELECT COUNT(*) FROM {table_name};")
             rows = cls.cur.fetchall()
             if rows:
-                Logger.logEvent('Info', f'Retrieved number of rows of table {TRADE_TABLE}')
+                Logger.logEvent('Info', f'Retrieved number of rows of table {table_name}')
                 return rows[0][0]
-            Logger.logEvent('Error', f'Error while counting rows of table {TRADE_TABLE}: {pe}')
+            Logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
             return -1
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while counting rows of table {TRADE_TABLE}: {pe}')
+            Logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
             return -1
     
     

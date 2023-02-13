@@ -7,5 +7,6 @@ quantity1 (12 digits)
 quantity2 (10 digits)
 value in 1k yen (9 digits)
 
-1M records reading + writing: 350s (~6 min)
-100M : 10 hrs
+10k records - ~0.3s
+1M records reading + writing: ~30s
+113M records : 1.2 hrs
