@@ -1,6 +1,5 @@
 '''This file contains the DBConnection class'''
 import psycopg2
-import psycopg2.extras
 from logger_class import Logger
 from config import DBVARS
 
@@ -13,6 +12,7 @@ class DBConnection:
     _instance = None
     retries = None
     insert_query = ''
+    logger = Logger()
     
     
     def __new__(cls):
@@ -22,167 +22,158 @@ class DBConnection:
         return cls._instance
     
     
-    @classmethod
-    def setInsertQuery(cls, insert_query):
+    def setInsertQuery(self, insert_query):
         '''This method sets the insert query'''
-        cls.insert_query = insert_query
+        self.insert_query = insert_query
     
     
-    @classmethod
-    def dbConnect(cls):
+    def dbConnect(self):
         '''This method establishes a connection to DB and create table if they don't exist'''
         try:
-            if not cls.conn:
-                cls.conn = psycopg2.connect(
+            if not self.conn:
+                self.conn = psycopg2.connect(
                     database=DBVARS['database'],
                     user=DBVARS['user'],
                     password=DBVARS['password'],
                     host=DBVARS['host'],
                     port=DBVARS['port']
                 )
-                cls.conn.autocommit = False
-                cls.cur = cls.conn.cursor()
-                Logger.logEvent('Info', f'Established new DB connection - {cls.conn}')
-            Logger.logEvent('Info', f'DB connection is already established')
+                self.conn.autocommit = False
+                self.cur = self.conn.cursor()
+                self.logger.logEvent('Info', f'Established new DB connection - {self.conn}')
+            self.logger.logEvent('Info', f'DB connection is already established')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Could not initialize DB connection - {pe}')
+            self.logger.logEvent('Error', f'Could not initialize DB connection - {pe}')
     
     
-    @classmethod
-    def getConnection(cls):
+    def getConnection(self):
         '''This method returns DB connection object'''
         try:
-            DBConnection.dbConnect()
-            Logger.logEvent('Info', f'Getting DB connection - {cls.conn}')
-            return cls.conn
+            self.dbConnect()
+            self.logger.logEvent('Info', f'Getting DB connection - {self.conn}')
+            return self.conn
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Could not get DB connection - {pe}')
+            self.logger.logEvent('Error', f'Could not get DB connection - {pe}')
             return None
     
     
-    @classmethod
-    def createTable(cls, table_name, create_query):
+    def createTable(self, table_name, create_query):
         '''This method creates the required table if it doesn't exist'''
         try:
-            DBConnection.dbConnect()
-            cls.cur.execute(create_query)
-            cls.commitChanges()
-            Logger.logEvent('Info', f'Created table - {table_name}')
+            self.dbConnect()
+            self.cur.execute(create_query)
+            self.commitChanges()
+            self.logger.logEvent('Info', f'Created table - {table_name}')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Could not create table {table_name}: {pe}')
-            cls.conn.rollback()
+            self.logger.logEvent('Error', f'Could not create table {table_name}: {pe}')
+            self.conn.rollback()
     
     
-    @classmethod
-    def insertRows(cls, entries):
+    def insertRows(self, entries):
         '''This method inserts rows into table'''
         try:
-            DBConnection.dbConnect()
-            if not cls.retries:
-                cls.retries = 0
-            if cls.retries > 3:
+            self.dbConnect()
+            if not self.retries:
+                self.retries = 0
+            if self.retries > 3:
                 return False
-            psycopg2.extras.execute_batch(cls.cur, cls.insert_query, entries)
-            cls.commitChanges()
-            Logger.logEvent('Info', f'Inserted {len(entries)} rows into table')
-            cls.retries = None
+            values = ','.join(self.cur.mogrify(self.insert_query[1], i).decode('utf-8')
+                for i in entries)
+            self.cur.execute(self.insert_query[0] + values + ';')
+            self.commitChanges()
+            self.logger.logEvent('Info', f'Inserted {len(entries)} rows into table')
+            self.retries = None
             return True
         except psycopg2.DatabaseError as dbe:
-            Logger.logEvent('Error', f'Database error while inserting {len(entries)} entries: {dbe}')
-            cls.conn.rollback()
-            cls.retries += 1
-            cls.insertRows(entries)
+            self.logger.logEvent('Error', f'Database error while inserting {len(entries)} entries: {dbe}')
+            self.conn.rollback()
+            self.retries += 1
+            self.insertRows(entries)
             return False
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while inserting {len(entries)} entries: {pe}')
-            cls.conn.rollback()
+            self.logger.logEvent('Error', f'Error while inserting {len(entries)} entries: {pe}')
+            self.conn.rollback()
             return False
     
     
-    @classmethod
-    def truncateTable(cls, table_name):
+    def truncateTable(self, table_name):
         '''This method drops table if it exists'''
         try:
-            DBConnection.dbConnect()
-            cls.cur.execute(f"TRUNCATE TABLE {table_name};")
-            if cls.commitChanges():
-                Logger.logEvent('Info', f'Successfully truncated table {table_name}')
+            self.dbConnect()
+            self.cur.execute(f"TRUNCATE TABLE {table_name};")
+            if self.commitChanges():
+                self.logger.logEvent('Info', f'Successfully truncated table {table_name}')
                 return True
-            Logger.logEvent('Error', f'Error while truncating table {table_name}')
+            self.logger.logEvent('Error', f'Error while truncating table {table_name}')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while truncating table {table_name}: {pe}')
-            cls.conn.rollback()
+            self.logger.logEvent('Error', f'Error while truncating table {table_name}: {pe}')
+            self.conn.rollback()
             return False
     
     
-    @classmethod
-    def dropTable(cls, table_name):
+    def dropTable(self, table_name):
         '''This method drops table if it exists'''
         try:
-            DBConnection.dbConnect()
-            cls.cur.execute(f"DROP TABLE IF EXISTS {table_name};")
-            if cls.commitChanges():
-                Logger.logEvent('Info', f'Dropped table {table_name}')
+            self.dbConnect()
+            self.cur.execute(f"DROP TABLE IF EXISTS {table_name};")
+            if self.commitChanges():
+                self.logger.logEvent('Info', f'Dropped table {table_name}')
                 return True
-            Logger.logEvent('Error', f'Error while dropping table {table_name}')
+            self.logger.logEvent('Error', f'Error while dropping table {table_name}')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while dropping table {table_name}: {pe}')
-            cls.conn.rollback()
+            self.logger.logEvent('Error', f'Error while dropping table {table_name}: {pe}')
+            self.conn.rollback()
             return False
     
     
-    @classmethod
-    def getCount(cls, table_name):
+    def getCount(self, table_name):
         '''This method drops table if it exists'''
         try:
-            DBConnection.dbConnect()
-            cls.cur.execute(f"SELECT COUNT(*) FROM {table_name};")
-            rows = cls.cur.fetchall()
+            self.dbConnect()
+            self.cur.execute(f"SELECT COUNT(*) FROM {table_name};")
+            rows = self.cur.fetchall()
             if rows:
-                Logger.logEvent('Info', f'Retrieved number of rows of table {table_name}')
+                self.logger.logEvent('Info', f'Retrieved number of rows of table {table_name}')
                 return rows[0][0]
-            Logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
+            self.logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
             return -1
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
+            self.logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
             return -1
     
     
-    @classmethod
-    def commitChanges(cls):
+    def commitChanges(self):
         '''This method commits the changes to DB'''
         try:
-            DBConnection.dbConnect()
-            cls.conn.commit()
-            Logger.logEvent('Info', 'Commit Successful')
+            self.dbConnect()
+            self.conn.commit()
+            self.logger.logEvent('Info', 'Commit Successful')
             return True
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while committing changes: {pe}')
+            self.logger.logEvent('Error', f'Error while committing changes: {pe}')
             return False
     
     
-    @classmethod
-    def rollback(cls):
+    def rollback(self):
         '''This method rollbacks changes to DB'''
         try:
-            DBConnection.dbConnect()
-            cls.conn.rollback()
-            Logger.logEvent('Info', 'Rollback Successful')
+            self.dbConnect()
+            self.conn.rollback()
+            self.logger.logEvent('Info', 'Rollback Successful')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while rollback: {pe}')
+            self.logger.logEvent('Error', f'Error while rollback: {pe}')
     
     
-    @classmethod
-    def closeDbConnection(cls):
+    def closeDbConnection(self):
         '''This method disconnects DB if it is connected'''
         try:
-            if cls.conn:
-                cls.cur.close()
-                cls.conn.close()
-                cls.cur = None
-                cls.conn = None
-                Logger.logEvent('Info', f'Closed connection to DB')
+            if self.conn:
+                self.cur.close()
+                self.conn.close()
+                self.cur = None
+                self.conn = None
+                self.logger.logEvent('Info', f'Closed connection to DB')
                 return
-            Logger.logEvent('Info', f'No open connections to close')
+            self.logger.logEvent('Info', f'No open connections to close')
         except psycopg2.Error as pe:
-            Logger.logEvent('Error', f'Error while closing DB Connection: {pe}')
+            self.logger.logEvent('Error', f'Error while closing DB Connection: {pe}')
