@@ -1,5 +1,6 @@
 '''This file contains the FileReader class'''
 from logger_class import Logger
+from time import perf_counter
 
 
 class FileReader:
@@ -30,10 +31,11 @@ class FileReader:
         '''This method moves the pointer to the given line in the file'''
         try:
             if cls.file_object:
+                start = perf_counter()
                 cls.file_object.seek(0)
                 for _ in range(line_number):
                     cls.file_object.readline()
-                Logger.logEvent('Info', f'Moved to line {line_number} in file')
+                Logger.logEvent('Info', f'Moved to line {line_number} in file in {perf_counter() - start} seconds')
             else:
                 Logger.logEvent('Error', f'File has not been initialized to move to line')
                 return False
@@ -52,7 +54,10 @@ class FileReader:
     def getLines(cls, no_of_lines):
         '''This method returns a tuple of lines'''
         try:
-            return tuple(tuple(cls.file_object.readline().rstrip('\r\n').split(',')) for _ in range(no_of_lines))
+            start = perf_counter()
+            values = tuple(tuple(cls.file_object.readline().rstrip('\r\n').split(',')) for _ in range(no_of_lines))
+            Logger.logEvent('Info', f'Retrieved {no_of_lines} lines in {perf_counter() - start} seconds')
+            return values
         except IOError as ioe:
             Logger.logEvent('Error', f'IOError while getting lines from file - {ioe}')
             return tuple()
@@ -72,7 +77,5 @@ class FileReader:
                 cls.file_object.close()
                 cls.file_object = None
                 Logger.logEvent('Info', f'File closed successfully')
-                return
-            Logger.logEvent('Info', f'No file to close')
         except Exception as e:
             Logger.logEvent('Error', f'Error while closing file - {e}')
