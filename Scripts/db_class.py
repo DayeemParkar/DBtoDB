@@ -5,13 +5,11 @@ from config import DBVARS
 
 
 class DBConnection:
-    '''Class containing methods to perform operations on database and tables'''
+    '''Class containing methods to connect to DB'''
     # class members
     conn = None
     cur = None
     _instance = None
-    retries = None
-    insert_query = ''
     logger = Logger()
     
     
@@ -20,11 +18,6 @@ class DBConnection:
         if not cls._instance:
             cls._instance = super(DBConnection, cls).__new__(cls)
         return cls._instance
-    
-    
-    def setInsertQuery(self, insert_query):
-        '''This method sets the insert query'''
-        self.insert_query = insert_query
     
     
     def dbConnect(self):
@@ -57,89 +50,15 @@ class DBConnection:
             return None
     
     
-    def createTable(self, table_name, create_query):
-        '''This method creates the required table if it doesn't exist'''
+    def getCursor(self):
+        '''This method returns DB cursor object'''
         try:
             self.dbConnect()
-            self.cur.execute(create_query)
-            self.commitChanges()
-            self.logger.logEvent('Info', f'Created table - {table_name}')
+            self.logger.logEvent('Info', f'Getting DB cursor - {self.cur}')
+            return self.cur
         except psycopg2.Error as pe:
-            self.logger.logEvent('Error', f'Could not create table {table_name}: {pe}')
-            self.conn.rollback()
-    
-    
-    def insertRows(self, entries):
-        '''This method inserts rows into table'''
-        try:
-            self.dbConnect()
-            if not self.retries:
-                self.retries = 0
-            if self.retries > 3:
-                return False
-            values = ','.join(self.cur.mogrify(self.insert_query[1], i).decode('utf-8')
-                for i in entries)
-            self.cur.execute(self.insert_query[0] + values + ';')
-            self.commitChanges()
-            self.logger.logEvent('Info', f'Inserted {len(entries)} rows into table')
-            self.retries = None
-            return True
-        except psycopg2.DatabaseError as dbe:
-            self.logger.logEvent('Error', f'Database error while inserting {len(entries)} entries: {dbe}')
-            self.conn.rollback()
-            self.retries += 1
-            self.insertRows(entries)
-            return False
-        except psycopg2.Error as pe:
-            self.logger.logEvent('Error', f'Error while inserting {len(entries)} entries: {pe}')
-            self.conn.rollback()
-            return False
-    
-    
-    def truncateTable(self, table_name):
-        '''This method drops table if it exists'''
-        try:
-            self.dbConnect()
-            self.cur.execute(f"TRUNCATE TABLE {table_name};")
-            if self.commitChanges():
-                self.logger.logEvent('Info', f'Successfully truncated table {table_name}')
-                return True
-            self.logger.logEvent('Error', f'Error while truncating table {table_name}')
-        except psycopg2.Error as pe:
-            self.logger.logEvent('Error', f'Error while truncating table {table_name}: {pe}')
-            self.conn.rollback()
-            return False
-    
-    
-    def dropTable(self, table_name):
-        '''This method drops table if it exists'''
-        try:
-            self.dbConnect()
-            self.cur.execute(f"DROP TABLE IF EXISTS {table_name};")
-            if self.commitChanges():
-                self.logger.logEvent('Info', f'Dropped table {table_name}')
-                return True
-            self.logger.logEvent('Error', f'Error while dropping table {table_name}')
-        except psycopg2.Error as pe:
-            self.logger.logEvent('Error', f'Error while dropping table {table_name}: {pe}')
-            self.conn.rollback()
-            return False
-    
-    
-    def getCount(self, table_name):
-        '''This method drops table if it exists'''
-        try:
-            self.dbConnect()
-            self.cur.execute(f"SELECT COUNT(*) FROM {table_name};")
-            rows = self.cur.fetchall()
-            if rows:
-                self.logger.logEvent('Info', f'Retrieved number of rows of table {table_name}')
-                return rows[0][0]
-            self.logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
-            return -1
-        except psycopg2.Error as pe:
-            self.logger.logEvent('Error', f'Error while counting rows of table {table_name}: {pe}')
-            return -1
+            self.logger.logEvent('Error', f'Could not get DB cursor - {pe}')
+            return None
     
     
     def commitChanges(self):

@@ -4,9 +4,11 @@ from logger_class import Logger
 from file_reader_class import FileReader
 from config import FILE_LOC, FILE_NAME , LOGGER_FILE_LOC, BATCH_SIZE
 from db_class import DBConnection
+from table_operations_class import TableOperations
 
 logger = Logger()
 db_connection = DBConnection()
+table_operations = TableOperations()
 file_reader = FileReader()
 
 
@@ -20,6 +22,8 @@ def startUp():
         columns = file_reader.getLines(1)[0]
         no_of_cols = len(columns)
         db_connection.dbConnect()
+        table_operations.setDatabaseAndCursor(db_connection)
+        
         
         table_name = FILE_NAME.rstrip('.csv')
         insert_query = [f'INSERT INTO {table_name} VALUES ', '(' + ', '.join([r'%s'] * no_of_cols) + ')']
@@ -33,16 +37,16 @@ def startUp():
         
         file_reader.moveToTop()
         file_reader.setNumberOfEntries(no_of_entries)
-        db_connection.setInsertQuery(insert_query)
-        db_connection.createTable(table_name, create_query)
+        table_operations.setInsertQuery(insert_query)
+        table_operations.createTable(table_name, create_query)
         logger.logEvent('Info', 'Startup successful')
-        return db_connection.getCount(table_name)
+        return table_operations.getCount(table_name)
     except Exception as e:
         logger.logEvent('Error', f'Error during startup: {e}')
         return -1
 
 
-def getInsertionStartingLine(entries):
+def getInsertionStartingBatch(entries):
     '''This method get the starting batch for the insertion of data'''
     try:
         table_name = FILE_NAME.rstrip('.csv')
@@ -55,7 +59,7 @@ def getInsertionStartingLine(entries):
             logger.logEvent('Info', f'Continuing insertion from entry {entries}')
             return entries // BATCH_SIZE
         if decision.lower() == 'n':
-            db_connection.truncateTable(table_name)
+            table_operations.truncateTable(table_name)
             logger.logEvent('Info', 'Restarting insertion')
             return 0
         logger.logEvent('Warning', 'Invalid input while choosing how to process with insertion')
@@ -70,7 +74,7 @@ def insertBatch(curr_batch):
     try:
         batch_start_time = perf_counter()
         lines = file_reader.getLines(min(BATCH_SIZE, file_reader.no_of_entries - (BATCH_SIZE * curr_batch)))
-        is_insertion_successful = db_connection.insertRows(lines)
+        is_insertion_successful = table_operations.insertRows(lines)
         if is_insertion_successful:
             msg = f'Batch {curr_batch + 1} completed in {perf_counter() - batch_start_time} seconds'
             print(msg)
