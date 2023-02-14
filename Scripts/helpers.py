@@ -24,7 +24,6 @@ def startUp():
         db_connection.dbConnect()
         table_operations.setDatabaseAndCursor(db_connection)
         
-        
         table_name = FILE_NAME.rstrip('.csv')
         insert_query = [f'INSERT INTO {table_name} VALUES ', '(' + ', '.join([r'%s'] * no_of_cols) + ')']
         create_query = f'CREATE TABLE {table_name} (' + ', '.join([f"col{i} varchar" for i in range(no_of_cols)]) + ');'

@@ -20,9 +20,11 @@ try:
     else:
         print('Invalid input')
 
-    shutdown()
+    shutdown(curr_batch)
     print('Overall execution time:', perf_counter() - script_start_time)
 except KeyboardInterrupt as ke:
+    shutdown(curr_batch)
     print('Execution was interrupted by keyboard input')
 except Exception as e:
+    shutdown(curr_batch)
     print('Error occured while execution of program')
